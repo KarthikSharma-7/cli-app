@@ -22,7 +22,7 @@ exports.signupQuestions = [
   },
 ];
 
-exports.loginQuestion = [
+exports.loginQuestions = [
   {
     type: "input",
     name: "email",
@@ -32,5 +32,31 @@ exports.loginQuestion = [
     type: "password",
     name: "password",
     message: "Enter your password",
+  },
+];
+
+exports.updateQuestions = [
+  {
+    type: "input",
+    name: "name",
+    message: "Enter the new name of the user",
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "Enter the new email of the user",
+  },
+];
+
+exports.resetPassword = [
+  {
+    type: "password",
+    name: "oldpassword",
+    message: "Enter old password",
+  },
+  {
+    type: "password",
+    name: "newpassword",
+    message: "Enter new password",
   },
 ];
