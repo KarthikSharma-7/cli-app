@@ -8,8 +8,8 @@ exports.userUpdate = async (body) => {
         "Content-Type": "application/json",
       },
     });
-    console.log("Response", data.data);
+    console.log("Response: ", data.data);
   } catch (error) {
-    console.log("Error:", error.response.data.Error);
+    console.log("Error: ", error.response.data.Error);
   }
 };

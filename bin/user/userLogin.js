@@ -12,9 +12,9 @@ exports.userLogin = async (body) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(data.data);
+      console.log("Response: ", data.data);
     } catch (error) {
-      console.log(error.response.data.Error);
+      console.log("Error: ", error.response.data.Error);
     }
   }
 };
