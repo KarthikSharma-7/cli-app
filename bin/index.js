@@ -13,7 +13,21 @@ const {
   loginQuestions,
   updateQuestions,
   resetPassword,
-} = require("./questions/userQuestions");
+} = require("./questions/userQuestions.js");
+const {
+  getAllPairs,
+  addToStore,
+  updateToStore,
+  getPair,
+  deleteFromStore,
+} = require("./store/index.js");
+const {
+  options,
+  addStore,
+  updateStore,
+  getOnePair,
+  deletePair,
+} = require("./questions/storeQuestions.js");
 
 program
   .name("cli-app")
@@ -26,25 +40,23 @@ program
   .description("Signup for a new user")
   .action(async () => {
     const answers = await prompt(signupQuestions);
-    userSignup(answers);
+    await userSignup(answers);
   });
 
 program
   .command("update-user")
-  .alias("u")
   .description("Updating an existing user")
   .option("-n", "Update name of the user")
   .option("-e", "Update email of the user")
-  .option("-n-e", "Update name and email of the user")
   .action(async (options) => {
-    if (options.NE === true) {
-      const answers = await prompt(updateQuestions);
+    if (options.e === true) {
+      const answers = await prompt(updateQuestions[1]);
       userUpdate(answers);
     } else if (options.n === true) {
       const answers = await prompt(updateQuestions[0]);
       userUpdate(answers);
     } else {
-      const answers = await prompt(updateQuestions[1]);
+      const answers = await prompt(updateQuestions);
       userUpdate(answers);
     }
   });
@@ -55,7 +67,20 @@ program
   .description("Login Here")
   .action(async () => {
     const answers = await prompt(loginQuestions);
-    userLogin(answers);
+    const token = await userLogin(answers);
+    console.log(token);
+    const answer = await prompt(options);
+    if (answer.action === "Add to store") {
+      console.log(`Use the command: a | add`);
+    } else if (answer.action === "Update to store") {
+      console.log(`Use the command: update-store`);
+    } else if (answer.action === "Delete from store") {
+      console.log(`Use the command: del | delete`);
+    } else if (answer.action === "Get all pairs") {
+      console.log(`Use the command: g | get`);
+    } else {
+      console.log(`Use the command: get-one`);
+    }
   });
 
 program
@@ -65,6 +90,60 @@ program
   .action(async () => {
     const answers = await prompt(resetPassword);
     userResetPassword(answers);
+  });
+
+program
+  .command("getall")
+  .alias("g")
+  .description("Get all KEY-VALUE pairs")
+  .action(() => {
+    getAllPairs();
+  });
+
+program
+  .command("add")
+  .alias("a")
+  .description("Add a new entry to the store")
+  .action(async () => {
+    const answers = await prompt(addStore);
+    addToStore(answers);
+  });
+
+program
+  .command("update-store")
+  .description("Updating an existing store")
+  .option("-k", "To update KEY...")
+  .option("-v", "To update VALUE...")
+  .action(async (options) => {
+    if (options.k === true) {
+      const array = updateStore.slice(0, 2);
+      const answers = await prompt(array);
+      updateToStore(answers);
+    } else if (options.v === true) {
+      const array = updateStore.splice(1, 1);
+      const answers = await prompt(updateStore);
+      updateToStore(answers);
+    } else {
+      const answers = await prompt(updateStore);
+      updateToStore(answers);
+    }
+  });
+
+program
+  .command("getone")
+  .description("Get a KEY-VALUE pair")
+  .action(async () => {
+    const answer = await prompt(getOnePair);
+    getPair(answer);
+  });
+
+program
+  .command("delete-key")
+  .alias("del")
+  .description("Delete a pair from store")
+  .action(async () => {
+    const answer = await prompt(deletePair);
+    deleteFromStore(answer);
   });
 
 program.parse();

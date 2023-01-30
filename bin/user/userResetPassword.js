@@ -8,6 +8,7 @@ exports.userResetPassword = async (body) => {
     const data = await axios.put(`${url}/reset`, body, {
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer ",
       },
     });
     console.log("Response: ", data.data);

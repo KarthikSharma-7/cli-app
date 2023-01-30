@@ -6,6 +6,7 @@ exports.userUpdate = async (body) => {
     const data = await axios.put(`${url}/update`, body, {
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer ",
       },
     });
     console.log("Response: ", data.data);

@@ -5,6 +5,7 @@ exports.userLogin = async (body) => {
   const { email, password } = body;
   if (!email || !password) {
     console.log("All fields required");
+    process.exit(0);
   } else {
     try {
       const data = await axios.post(`${url}/login`, body, {
@@ -12,9 +13,11 @@ exports.userLogin = async (body) => {
           "Content-Type": "application/json",
         },
       });
-      console.log("Response: ", data.data);
+      console.log(`Welcome ${data.data.name}`);
+      return data.data.token;
     } catch (error) {
       console.log("Error: ", error.response.data.Error);
+      process.exit(0);
     }
   }
 };
