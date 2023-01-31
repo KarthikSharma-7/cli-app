@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { decryptToken } = require("../token/decrypt");
 const URL = "http://localhost:5000/api/store";
 
 exports.updateToStore = async (body) => {
@@ -8,10 +9,11 @@ exports.updateToStore = async (body) => {
   const key = body.oldkey;
   delete body.oldkey;
   try {
+    const token = decryptToken();
     const data = await axios.put(`${URL}/update/${key}`, body, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer ",
+        Authorization: `Bearer ${token}`,
       },
     });
     console.log("Response: ", data.data);

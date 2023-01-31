@@ -28,6 +28,7 @@ const {
   getOnePair,
   deletePair,
 } = require("./questions/storeQuestions.js");
+const { storeToken } = require("./token/token.js");
 
 program
   .name("cli-app")
@@ -67,8 +68,7 @@ program
   .description("Login Here")
   .action(async () => {
     const answers = await prompt(loginQuestions);
-    const token = await userLogin(answers);
-    console.log(token);
+    await userLogin(answers);
     const answer = await prompt(options);
     if (answer.action === "Add to store") {
       console.log(`Use the command: a | add`);
