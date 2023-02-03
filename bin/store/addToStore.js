@@ -1,10 +1,10 @@
 const axios = require("axios");
-const { decryptToken } = require("../token/decrypt");
+const { accessToken } = require("../token/accessToken.js");
 const URL = "http://localhost:5000/api/store";
 
 exports.addToStore = async (body) => {
   const { key, value } = body;
-  const token = await decryptToken();
+  const token = await accessToken();
   if (!key || !value) {
     return console.log("All fields required");
   }

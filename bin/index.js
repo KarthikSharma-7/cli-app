@@ -7,6 +7,7 @@ const {
   userLogin,
   userUpdate,
   userResetPassword,
+  logout,
 } = require("./user/index.js");
 const {
   signupQuestions,
@@ -144,6 +145,13 @@ program
   .action(async () => {
     const answer = await prompt(deletePair);
     deleteFromStore(answer);
+  });
+
+program
+  .command("logout")
+  .description("Logout")
+  .action(() => {
+    logout();
   });
 
 program.parse();

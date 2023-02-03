@@ -1,10 +1,10 @@
 const axios = require("axios");
-const { decryptToken } = require("../token/decrypt");
+const { accessToken } = require("../token/accessToken.js");
 const URL = "http://localhost:5000/api/store";
 
 exports.deleteFromStore = async (body) => {
   const { key } = body;
-  const token = decryptToken();
+  const token = accessToken();
   if (!key) {
     return console.log("Enter KEY to delete pair");
   }

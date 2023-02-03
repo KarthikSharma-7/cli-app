@@ -1,10 +1,10 @@
 const axios = require("axios");
-const { decryptToken } = require("../token/decrypt");
+const { accessToken } = require("../token/accessToken.js");
 const url = "http://localhost:5000/api/user";
 
 exports.userUpdate = async (body) => {
   try {
-    const token = await decryptToken();
+    const token = await accessToken();
     const data = await axios.put(`${url}/update`, body, {
       headers: {
         "Content-Type": "application/json",
@@ -13,6 +13,10 @@ exports.userUpdate = async (body) => {
     });
     console.log("Response: ", data.data);
   } catch (error) {
-    console.log("Error: ", error.response.data.Error);
+    if (error.response.data.Error) {
+      console.log(error.response.data.Error);
+    } else {
+      console.log("Error Occured....Try Again");
+    }
   }
 };

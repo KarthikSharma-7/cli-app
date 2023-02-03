@@ -1,10 +1,10 @@
 const axios = require("axios");
-const { decryptToken } = require("../token/decrypt");
+const { accessToken } = require("../token/accessToken.js");
 const url = "http://localhost:5000/api/user";
 
 exports.userResetPassword = async (body) => {
   const { oldpassword, newpassword } = body;
-  const token = await decryptToken();
+  const token = await accessToken();
   try {
     const data = await axios.put(`${url}/reset`, body, {
       headers: {
