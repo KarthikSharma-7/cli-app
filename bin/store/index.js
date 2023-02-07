@@ -1,5 +1,5 @@
 const { getAllPairs } = require("./getAllPairs");
-const { addToStore } = require("./addToStore");
+const { addToStore, imageUpload } = require("./addToStore");
 const { updateToStore } = require("./updateToStore");
 const { getPair } = require("./getPair");
 const { deleteFromStore } = require("./deleteFromStore");
@@ -10,4 +10,5 @@ module.exports = {
   updateToStore,
   getPair,
   deleteFromStore,
+  imageUpload,
 };

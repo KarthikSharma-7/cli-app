@@ -21,6 +21,7 @@ const {
   updateToStore,
   getPair,
   deleteFromStore,
+  imageUpload,
 } = require("./store/index.js");
 const {
   options,
@@ -104,8 +105,9 @@ program
 program
   .command("add")
   .alias("a")
+  .option("i")
   .description("Add a new entry to the store")
-  .action(async () => {
+  .action(async (options) => {
     const answers = await prompt(addStore);
     addToStore(answers);
   });
@@ -153,5 +155,16 @@ program
   .action(() => {
     logout();
   });
+
+program.command("image").action(async () => {
+  const ans = await prompt([
+    {
+      type: "input",
+      name: "pic",
+      message: "image path",
+    },
+  ]);
+  imageUpload(ans);
+});
 
 program.parse();

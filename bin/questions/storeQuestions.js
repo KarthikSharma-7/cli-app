@@ -22,7 +22,7 @@ exports.addStore = [
   {
     type: "input",
     name: "value",
-    message: "Add a VALUE to store",
+    message: "Add a VALUE to store(Exact path incase of an image)",
   },
 ];
 
