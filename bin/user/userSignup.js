@@ -20,9 +20,9 @@ exports.userSignup = async (body) => {
           },
         }
       );
-      console.log(data.data);
+      console.log("Response: ", data.data);
     } catch (error) {
-      console.log(error.response.data.Error);
+      console.log("Error: ", error.response.data.Error);
     }
   }
 };
