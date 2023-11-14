@@ -88,7 +88,7 @@ program
 program
   .command("reset")
   .alias("r")
-  .description("Reset your password")
+  .description("Reset Your Password")
   .action(async () => {
     const answers = await prompt(resetPassword);
     userResetPassword(answers);
