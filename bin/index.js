@@ -97,7 +97,7 @@ program
 program
   .command("getall")
   .alias("g")
-  .description("Get all KEY-VALUE pairs")
+  .description("Get all key-value pairs")
   .action(() => {
     getAllPairs();
   });
@@ -134,7 +134,7 @@ program
 
 program
   .command("getone")
-  .description("Get a KEY-VALUE pair")
+  .description("Get a key-value pair")
   .action(async () => {
     const answer = await prompt(getOnePair);
     getPair(answer);
@@ -143,7 +143,7 @@ program
 program
   .command("delete-key")
   .alias("del")
-  .description("Delete a pair from store")
+  .description("Delete a pair from the store")
   .action(async () => {
     const answer = await prompt(deletePair);
     deleteFromStore(answer);
