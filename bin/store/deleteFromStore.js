@@ -1,12 +1,15 @@
 const axios = require("axios");
 const { accessToken } = require("../token/accessToken.js");
-const url = "http://localhost:5000/api/user";
+const URL = "http://localhost:5000/api/store";
 
-exports.userResetPassword = async (body) => {
-  const { oldpassword, newpassword } = body;
-  const token = await accessToken();
+exports.deleteFromStore = async (body) => {
+  const { key } = body;
+  const token = accessToken();
+  if (!key) {
+    return console.log("Enter KEY to delete pair");
+  }
   try {
-    const data = await axios.put(`${url}/reset`, body, {
+    const data = await axios.delete(`${URL}/delete/${key}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

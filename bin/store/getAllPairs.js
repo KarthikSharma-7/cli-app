@@ -1,12 +1,11 @@
 const axios = require("axios");
 const { accessToken } = require("../token/accessToken.js");
-const url = "http://localhost:5000/api/user";
+const URL = "http://localhost:5000/api/store";
 
-exports.userResetPassword = async (body) => {
-  const { oldpassword, newpassword } = body;
-  const token = await accessToken();
+exports.getAllPairs = async () => {
   try {
-    const data = await axios.put(`${url}/reset`, body, {
+    const token = await accessToken();
+    const data = await axios.get(`${URL}/getAll`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
